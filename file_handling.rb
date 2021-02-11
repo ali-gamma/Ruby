@@ -5,7 +5,7 @@ lines = cs.readlines
 for line in lines
   puts line
 end
-new = ["Ali","Noor","NA","NA","NA"]
+new = [ "Ali" , "Noor" , "NA" , "NA" , "NA" ] 
 
 cs.syswrite(new)
 
