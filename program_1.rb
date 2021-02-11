@@ -2,26 +2,25 @@
 
 array_1 = []
 while true
-	puts "enter array elements"
-	ele = gets.chop.to_s
-	if ele ==""
-		break
-	end
-	array_1.push(ele)
+  puts "enter array elements"
+  ele = gets.chop.to_s
+  if ele ==""
+    break
+  end
+  array_1.push(ele)
 end
 
 puts "Enter element to search"
 x = gets.chop.to_s
-i=0
+i = 0
 for i in 0...array_1.length-1 
-	if array_1[i] != x && array_1[i+1] != x
-		puts "The element is not everywhere"
-		break
-			
-	end
+  if array_1[i] != x && array_1[i+1] != x
+    puts "The element is not everywhere"
+    break		
+  end
 end
 if i == array_1.length-2
-	puts "Element is everywhere!"
+  puts "Element is everywhere!"
 end	
 =begin	
 Case:1
