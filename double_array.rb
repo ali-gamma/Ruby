@@ -9,12 +9,12 @@ while true
 
   array_1.push(ele)
 end
-array_2 = array_1.map{|n|
-  if n.match('\d+')
-    n=2*n.to_i
+array_2 = array_1.map{ |n|
+  if n.match( '\d+' )
+    n = 2 * n.to_i
   else
-    n=n+n
-  end}	
+    n = n + n
+  end }	
 puts array_2
 
 =begin
