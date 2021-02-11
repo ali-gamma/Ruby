@@ -4,7 +4,7 @@ name = gets.chop.to_s
 
 i = name.index(".")
 if i== 0 
-	puts "No Extension"
+  puts "No Extension"
 end
 puts "File extension is :  "+name[i..-1]
 
