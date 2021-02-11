@@ -1,9 +1,11 @@
 # Write a Ruby program to get a substring from a specified position to the last char of a given string.
+
 puts "Enter the string"
-a = gets.chop
+string_1 = gets.chop
 puts "Enter the index"
-x = gets.chop.to_i
-puts a[x..-1]
+pos = gets.chop.to_i
+puts string_1[pos..-1]
+
 =begin
 
 Enter the string
