@@ -1,9 +1,9 @@
-#2. Using hash table, print the frequency of occurrence of each character inside an array.
+# 2. Using hash table, print the frequency of occurrence of each character inside an array . 
 
 
 
-array_1 =[]
-hash_1 ={}
+array_1 = []
+hash_1 = {}
 while true
   puts "enter an element"
   ele = gets.chop.to_s
