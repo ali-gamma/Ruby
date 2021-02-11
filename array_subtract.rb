@@ -13,7 +13,7 @@ if array_1.length == 1
   puts array_1[0]
 else
   array_1.sort
-  diff = array_1[-1]-array_1[0]
+  diff = array_1[-1] - array_1[0]
   puts "The difference is  :  " + diff.to_s
 	
 end
