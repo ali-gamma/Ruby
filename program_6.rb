@@ -2,19 +2,19 @@
 
 array_1 = []
 while true
-	ele = gets.chomp
-	if ele == ""
-		break
-	end
+  ele = gets.chomp
+  if ele == ""
+    break
+  end
 
-	array_1.push(ele)
+  array_1.push(ele)
 end
 array_2 = array_1.map{|n|
-	if n.match('\d+')
-		n=2*n.to_i
-	else
-		n=n+n
-	end}	
+  if n.match('\d+')
+    n=2*n.to_i
+  else
+    n=n+n
+  end}	
 puts array_2
 
 =begin
