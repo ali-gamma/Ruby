@@ -3,20 +3,21 @@
 array_1 = []
 puts "Enter array"
 while true
-	ele = gets.chomp.to_i
-	if ele == 0
-		break
-	end
-	array_1.push(ele)
+  ele = gets.chomp.to_i
+  if ele == 0
+    break
+  end
+  array_1.push(ele)
 end
 if array_1.length == 1
-	puts array_1[0]
+  puts array_1[0]
 else
-	array_1.sort
-	diff = array_1[-1]-array_1[0]
-	puts "The difference is  :  " + diff.to_s
+  array_1.sort
+  diff = array_1[-1]-array_1[0]
+  puts "The difference is  :  " + diff.to_s
 	
-end	
+end
+
 =begin
 
 Enter array
