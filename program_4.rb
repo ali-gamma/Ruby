@@ -3,7 +3,6 @@ puts "Enter the string"
 a = gets.chop
 puts "Enter the index"
 x = gets.chop.to_i
-
 puts a[x..-1]
 =begin
 
