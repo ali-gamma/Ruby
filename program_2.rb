@@ -5,22 +5,23 @@
 array_1 =[]
 hash_1 ={}
 while true
-	puts "enter an element"
-	ele = gets.chop.to_s
-	if ele == ""
-		break
-	end
-	array_1.push(ele)
-	if hash_1[ele]
-		hash_1[ele] +=1
-	else
-		hash_1[ele] = 1	
-	end
+  puts "enter an element"
+  ele = gets.chop.to_s
+  if ele == ""
+    break
+  end
+  array_1.push(ele)
+  if hash_1[ele]
+    hash_1[ele] +=1
+  else
+    hash_1[ele] = 1	
+  end
 end
 	
 for i in array_1.uniq
-	puts "The element  " + i.to_s + "  occurs  " + hash_1[i].to_s + "  times"
+  puts "The element  " + i.to_s + "  occurs  " + hash_1[i].to_s + "  times"
 end
+
 =begin
 enter an element
 a
