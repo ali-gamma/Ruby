@@ -1,3 +1,18 @@
+=begin
+
+Basic sales tax is applicable at a rate of 10% on all goods, except books,
+food, and medical products that are exempt. Import duty is an additional
+sales tax applicable on all imported goods at a rate of 5%, with no
+exemptions.
+
+When I purchase items I receive a receipt which lists the name of all the
+items and their price (including tax), finishing with the total cost of the
+items, and the total amounts of sales taxes paid. The rounding rules for
+sales tax are that for a tax rate of n%, a shelf price of p contains
+(np/100 rounded up to the nearest 0.05) amount of sales tax.
+
+=end
+
 class Exempt
 
   attr_accessor :quantity,:price,:name,:tax
@@ -27,6 +42,7 @@ end
 
 $final_output = []
 $no_tax = ["chocolate" , "chips" , "snacks" , "cake", "muffins" , "pill" , "tablet" , "injection" , "book" ]
+#add any keywords associated with tax exemption to $no_tax array
 $words = []
 
 class Bill
@@ -135,7 +151,25 @@ end
 puts "Sales Taxes  :  " + Bill.total_tax.round(2).to_s
 puts "Total    :    " + Bill.checkout.round(2).to_s
 
-	
+
+=begin
+
+Sample Input :
+
+Enter all items purchased
+1 chocolate at 16.99
+1 imported bicycle at 999.99
+1 cold pills box at 49.99
+5 books at 200.00
+
+1   chocolate  :16.99
+1   imported bicycle  :1149.99
+1   cold pills box  :49.99
+5   books  :200.0
+Sales Taxes  :  150.0
+Total    :    1416.97
+
+=end	
 	
 	
 	
