@@ -1,14 +1,13 @@
 #Read from a CSV file, multiple columns (minimum 2), and then write back to the CSV file.
 
-cs = File.open("addresses.csv",'r+')
+cs = File.open("addresses.csv", 'r+')
 lines = cs.readlines
 for line in lines
   puts line
 end
-new = [ "Ali" , "Noor" , "NA" , "NA" , "NA" ] 
+new =  %w(Ali Noor NA NA NA) 
 
 cs.syswrite(new)
-
 
 =begin
 

@@ -4,9 +4,7 @@ array_1 = []
 while true
   puts "enter array elements"
   ele = gets.chop.to_s
-  if ele ==""
-    break
-  end
+  break if ele == ""
   array_1.push(ele)
 end
 

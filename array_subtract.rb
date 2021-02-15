@@ -4,9 +4,7 @@ array_1 = []
 puts "Enter array"
 while true
   ele = gets.chomp.to_i
-  if ele == 0
-    break
-  end
+  break if ele == 0
   array_1.push(ele)
 end
 if array_1.length == 1
@@ -14,8 +12,7 @@ if array_1.length == 1
 else
   array_1.sort
   diff = array_1[-1] - array_1[0]
-  puts "The difference is  :  " + diff.to_s
-	
+  puts "The difference is  :  " + diff.to_s	
 end
 
 =begin

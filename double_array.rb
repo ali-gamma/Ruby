@@ -3,18 +3,16 @@
 array_1 = []
 while true
   ele = gets.chomp
-  if ele == ""
-    break
-  end
-
+  break if ele == ""
   array_1.push(ele)
 end
-array_2 = array_1.map{ |n|
+array_2 = array_1.map do |n|
   if n.match( '\d+' )
     n = 2 * n.to_i
   else
     n = n + n
-  end }	
+  end
+end	
 puts array_2
 
 =begin

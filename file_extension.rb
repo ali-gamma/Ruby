@@ -1,11 +1,11 @@
 #3. Write a Ruby program to accept a filename from the user and print the extension of that.
+
+
 puts "Enter File Name   "
 name = gets.chop.to_s
 
 i = name.index(".")
-if i == 0 
-  puts "No Extension"
-end
+puts "No Extension" if i == 0
 puts "File extension is :  "+name[i..-1]
 
 =begin

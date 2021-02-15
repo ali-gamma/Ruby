@@ -7,15 +7,9 @@ hash_1 = {}
 while true
   puts "enter an element"
   ele = gets.chop.to_s
-  if ele == ""
-    break
-  end
+  break if ele ==""
   array_1.push(ele)
-  if hash_1[ele]
-    hash_1[ele] +=1
-  else
-    hash_1[ele] = 1	
-  end
+  hash_1[ele] = hash_1[ele]? hash_1[ele] + 1 : 1
 end
 	
 for i in array_1.uniq
