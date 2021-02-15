@@ -7,7 +7,7 @@ hash_1 = {}
 while true
   puts "enter an element"
   ele = gets.chop.to_s
-  break if ele ==""
+  break if ele == ""
   array_1.push(ele)
   hash_1[ele] = hash_1[ele]? hash_1[ele] + 1 : 1
 end
