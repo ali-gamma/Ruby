@@ -9,7 +9,7 @@ while true
   ele = gets.chop.to_s
   break if ele == ""
   array_1.push(ele)
-  hash_1[ele] = hash_1[ele]? hash_1[ele] + 1 : 1
+  hash_1[ele] = hash_1[ele] ? hash_1[ele] + 1 : 1
 end
 	
 for i in array_1.uniq
