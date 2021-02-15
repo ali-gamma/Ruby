@@ -76,7 +76,7 @@ class Bill
       temp = tax * @obj1.price
       temp -= @obj1.price
       temp *= 20
-      sales_tax =  temp.round(0) / 20.0
+      sales_tax =  temp.ceil / 20.0
       @total = @obj1.price + sales_tax      
     end
     @@amount += @total
@@ -131,7 +131,6 @@ end
 puts "Sales Taxes  :  " + Bill.total_tax.round(2).to_s
 puts "Total    :    " + Bill.checkout.round(2).to_s
 
-
 =begin
 
 Sample Input :
@@ -150,6 +149,4 @@ Sales Taxes  :  150.0
 Total    :    1416.97
 
 =end	
-	
-	
 	
