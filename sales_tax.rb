@@ -41,7 +41,7 @@ class Taxed
 end
 
 $final_output = []
-$no_tax = ["chocolate" , "chips" , "snacks" , "cake", "muffins" , "pill" , "tablet" , "injection" , "book" ]
+$no_tax = %w(chocolate chips snacks cake muffins pill tablet injection book)
 #add any keywords associated with tax exemption to $no_tax array
 $words = []
 
@@ -50,57 +50,41 @@ class Bill
   @@amount = 0
   @@taxes = 0
 
-  def initialize(quantity , price , name , imported)
+  def initialize(quantity , price , name , imported)  
     @quantity = quantity
     @price = price
     @name = name
     @imported = imported
     @obj1 = Taxed.new(quantity , price , name)
     @name = " " + name
-    for item in $no_tax
-		
-      if name.index(item)
-        
-        @obj1 = Exempt.new(quantity , price , name)
-      else
-				
-      end
+    
+    for item in $no_tax        
+      @obj1 = Exempt.new(quantity , price , name) if name.index(item)
     end
+
     @total = 0
     @taxes = 0
-
   end	
 
   def taxes()
-
     tax = @obj1.tax
     sales_tax = 0
-    if @imported == true
-      tax+=0.05
-    else
-			
-    end
-
+    tax += 0.05 if @imported == true
     if @obj1.tax == 1.0 and @imported == false
     	@total = @obj1.price
-    else
-    
+    else    
       temp = tax * @obj1.price
       temp -= @obj1.price
       temp *= 20
       sales_tax =  temp.round(0) / 20.0
-      @total = @obj1.price + sales_tax
-      
+      @total = @obj1.price + sales_tax      
     end
-    
     @@amount += @total
-    @@taxes += sales_tax
-				
+    @@taxes += sales_tax				
   end
 
-  def add_line()
+  def add_line() 
     taxes()
-    
     price_sum = @quantity.to_s + "  " + @name + "  :" + @total.round(2).to_s
     $final_output.push(price_sum)
   end
@@ -118,34 +102,29 @@ end
 puts "Enter all items purchased"
 
 while true
-  input = gets.chomp
-  
-  if input == ""
-    break
-  end	
-
+  input = gets.chomp  
+  break if input == ""
   words = input.split
   quantity = words[0].to_i
   words.delete_at(0)
   price = words[-1].to_f
   words.delete_at(-1)
   words.delete("at")
-  name = words.join(" ")
-  imported = false
-  if words.include?("imported")
-    imported = true
-  else
   
+  if quantity <= 0 or price < 0
+    puts "Input is not valid"
+    break
   end
   
+  name = words.join(" ")
+  imported = false 
+  imported = true if words.include?("imported")
   item_bill = Bill.new(quantity,price,name,imported)
-  item_bill.add_line()
-  
+  item_bill.add_line()  
 end
 
 for item in $final_output
   puts item
-  
 end
 
 puts "Sales Taxes  :  " + Bill.total_tax.round(2).to_s
