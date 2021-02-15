@@ -109,6 +109,7 @@ while true
   words.delete_at(0)
   price = words[-1].to_f
   words.delete_at(-1)
+  break unless words.include?("at")
   words.delete("at")
   
   if quantity <= 0 or price < 0
