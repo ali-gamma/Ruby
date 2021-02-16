@@ -11,7 +11,7 @@ end
 puts "Enter element to search"
 x = gets.chop.to_s
 i = 0
-for i in 0...array_1.length-1 
+for i in 0 ... array_1.length - 1 
   if array_1[i] != x && array_1[i+1] != x
     puts "The element is not everywhere"
     break		
