@@ -15,58 +15,51 @@ sales tax are that for a tax rate of n%, a shelf price of p contains
 
 class Exempt
 
-  attr_accessor :quantity,:price,:name,:tax
+  attr_accessor :quantity, :price, :name, :tax
 
-  def initialize( quantity , price , name)
+  def initialize(quantity, price, name)
     @quantity = quantity
     @price = price
     @name = name
     @tax = 1
-		
-  end
-	
+	end
 end
 
 class Taxed
 
   attr_accessor :quantity,:price,:name,:tax
 
-  def initialize( quantity , price , name)
+  def initialize(quantity, price, name)
     @quantity = quantity
     @price = price
     @name = name
     @tax = 1.10
   end
-
 end
-
-$final_output = []
-$no_tax = %w(chocolate chips snacks cake muffins pill tablet injection book)
-#add any keywords associated with tax exemption to $no_tax array
-$words = []
 
 class Bill
 
   @@amount = 0
   @@taxes = 0
-
-  def initialize(quantity , price , name , imported)  
+  @@final_output = []
+  
+  def initialize(quantity, price, name, imported)  
     @quantity = quantity
     @price = price
     @name = name
     @imported = imported
-    @obj1 = Taxed.new(quantity , price , name)
+    @obj1 = Taxed.new(quantity, price, name)
     @name = " " + name
-    
-    for item in $no_tax        
+    no_tax = %w(chocolate chips snacks cake muffins pill tablet injection book)  
+    #add any keywords associated with tax exemption to no_tax array
+    for item in no_tax        
       @obj1 = Exempt.new(quantity , price , name) if name.index(item)
     end
-
     @total = 0
     @taxes = 0
   end	
 
-  def taxes()
+  def taxes
     tax = @obj1.tax
     sales_tax = 0
     tax += 0.05 if @imported == true
@@ -83,54 +76,59 @@ class Bill
     @@taxes += sales_tax				
   end
 
-  def add_line() 
-    taxes()
-    price_sum = @quantity.to_s + "  " + @name + "  :" + @total.round(2).to_s
-    $final_output.push(price_sum)
+  def add_line
+    taxes
+    price_sum = "#{@quantity} #{@name} : #{@total.round(2)}"
+    @@final_output.push(price_sum)
   end
   
-  def self.total_tax()
+  def self.total_tax
     @@taxes
   end
   
-  def self.checkout()
+  def self.checkout
     @@amount
   end
 
-end
-
-puts "Enter all items purchased"
-
-while true
-  input = gets.chomp  
-  break if input == ""
-  words = input.split
-  quantity = words[0].to_i
-  words.delete_at(0)
-  price = words[-1].to_f
-  words.delete_at(-1)
-  break unless words.include?("at")
-  words.delete("at")
-  
-  if quantity <= 0 or price < 0
-    puts "Input is not valid"
-    break
+  def self.final_output
+    @@final_output
   end
+end
+
+def main_loop
+  puts "Enter all items purchased"
+  final_output = Bill.final_output
+
+  while true
+    input = gets.chomp  
+    break if input == ""
+    words = input.split
+    quantity = words[0].to_i
+    words.delete_at(0)
+    price = words[-1].to_f
+    words.delete_at(-1)
+    break unless words.include?("at")
+    words.delete("at")
   
-  name = words.join(" ")
-  imported = false 
-  imported = true if words.include?("imported")
-  item_bill = Bill.new(quantity,price,name,imported)
-  item_bill.add_line()  
+    if quantity <= 0 or price < 0
+      puts "Input is not valid"
+      break
+    end
+    
+    name = words.join(" ")
+    imported = false 
+    imported = true if words.include?("imported")
+    item_bill = Bill.new(quantity,price,name,imported)
+    item_bill.add_line()  
+  end
+
+  final_output.each { |n| puts n }
+  puts "Sales Taxes  :  " + Bill.total_tax.round(2).to_s
+  puts "Total    :    " + Bill.checkout.round(2).to_s
+
 end
 
-for item in $final_output
-  puts item
-end
-
-puts "Sales Taxes  :  " + Bill.total_tax.round(2).to_s
-puts "Total    :    " + Bill.checkout.round(2).to_s
-
+main_loop
 =begin
 
 Sample Input :
