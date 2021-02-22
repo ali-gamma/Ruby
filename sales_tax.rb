@@ -13,32 +13,10 @@ sales tax are that for a tax rate of n%, a shelf price of p contains
 
 =end
 
-class Exempt
-
-  attr_accessor :quantity, :price, :name, :tax
-
-  def initialize(quantity, price, name)
-    @quantity = quantity
-    @price = price
-    @name = name
-    @tax = 1
-	end
-end
-
-class Taxed
-
-  attr_accessor :quantity,:price,:name,:tax
-
-  def initialize(quantity, price, name)
-    @quantity = quantity
-    @price = price
-    @name = name
-    @tax = 1.10
-  end
-end
-
 class Bill
 
+  NO_TAX = %w(chocolate chips snacks cake muffins pill tablet injection book)
+  #add any keywords associated with tax exemption to NO_TAX array
   @@amount = 0
   @@taxes = 0
   @@final_output = []
@@ -48,29 +26,23 @@ class Bill
     @price = price
     @name = name
     @imported = imported
-    @obj1 = Taxed.new(quantity, price, name)
     @name = " " + name
-    no_tax = %w(chocolate chips snacks cake muffins pill tablet injection book)  
-    #add any keywords associated with tax exemption to no_tax array
-    for item in no_tax        
-      @obj1 = Exempt.new(quantity , price , name) if name.index(item)
-    end
+    @tax = 1.10
+    NO_TAX.each {|item| @tax = 1.00 if name.index(item)}
     @total = 0
-    @taxes = 0
   end	
 
   def taxes
-    tax = @obj1.tax
     sales_tax = 0
-    tax += 0.05 if @imported == true
-    if @obj1.tax == 1.0 and @imported == false
-    	@total = @obj1.price
+    @tax += 0.05 if @imported == true
+    if @tax == 1.0 && @imported == false
+    	@total = @price
     else    
-      temp = tax * @obj1.price
-      temp -= @obj1.price
+      temp = @tax * @price
+      temp -= @price
       temp *= 20
       sales_tax =  temp.ceil / 20.0
-      @total = @obj1.price + sales_tax      
+      @total = @price + sales_tax      
     end
     @@amount += @total
     @@taxes += sales_tax				
@@ -110,7 +82,7 @@ def main_loop
     break unless words.include?("at")
     words.delete("at")
   
-    if quantity <= 0 or price < 0
+    if quantity <= 0 || price < 0
       puts "Input is not valid"
       break
     end
@@ -118,8 +90,8 @@ def main_loop
     name = words.join(" ")
     imported = false 
     imported = true if words.include?("imported")
-    item_bill = Bill.new(quantity,price,name,imported)
-    item_bill.add_line()  
+    item_bill = Bill.new(quantity, price, name, imported)
+    item_bill.add_line
   end
 
   final_output.each { |n| puts n }
@@ -147,4 +119,3 @@ Sales Taxes  :  150.0
 Total    :    1416.97
 
 =end	
-	
